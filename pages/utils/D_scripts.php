@@ -1,0 +1,9 @@
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/popper.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/mdb.min.js"></script>
+<script type="text/javascript" src="../js/addons/imagesloaded.pkgd.min.js"></script>
+<script src="../js/packery.pkgd.min.js"></script>
+<script src="../js/flickity.pkgd.min.js"></script>
+<script src="../js/fullscreen.js"></script>
+<script type="text/javascript" src="../js/misc.js"></script>
