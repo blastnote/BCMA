@@ -1,10 +1,10 @@
 <?php 
 require 'utils/docStart.php';
 
-// if (strpos($_SESSION['userPerms'], 'a') == false) {
-//   header("Location: ../index.php");
-//   exit();
-// }
+if (strpos($_SESSION['userPerms'], 'a') === false) {
+  header("Location: ../index.php");
+  exit();
+}
 
 include_once '../includes/dbhA.inc.php';
 ?>
@@ -16,14 +16,7 @@ include_once '../includes/dbhA.inc.php';
 </head>
 
 <body>
-  <?php
-  require "utils/nav.php";
-
-  $sql = "SELECT * FROM active;";
-  $result = mysqli_query($conn, $sql);
-  $resultCheck = mysqli_num_rows($result);
-  ?>
-  
+  <?php require "utils/nav.php"; ?>
 
   <!-- Main body -->
   <main class="elegant-color min-vh-100 pt-5">
@@ -61,7 +54,11 @@ include_once '../includes/dbhA.inc.php';
       </div>
 
       <div class="grid ml-4">
-        <?php 
+        <?php
+        $sql = "SELECT * FROM active LIMIT 30;";
+        $result = mysqli_query($conn, $sql);
+        $resultCheck = mysqli_num_rows($result);
+
         if ($resultCheck > 0) {
           while ($row = mysqli_fetch_assoc($result)) { 
             if (($row['itemD'] == 0) || $d) { ?>

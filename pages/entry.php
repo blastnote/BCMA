@@ -1,10 +1,10 @@
 <?php 
 require 'utils/docStart.php' ;
 
-// if (strpos($_SESSION['userPerms'], 'a') == false) {
-//   header("Location: ../index.php");
-//   exit();
-// }
+if (strpos($_SESSION['userPerms'], 'a') === false) {
+  header("Location: ../index.php");
+  exit();
+}
 
 include_once '../includes/dbhA.inc.php';
 ?>
