@@ -13,7 +13,7 @@
 
   <div class="container-fluid mt-4">
   	<form action="../includes/addEntry.inc.php" method="POST">
-				<input type="text" class="form-control mb-4" name="AID" placeholder="Item archival ID" required>
+				<!-- <input type="text" class="form-control mb-4" name="AID" placeholder="Item archival ID" required> -->
 				
 				<input type="date" class="form-control mb-4" name="ADate" placeholder="Accession date" required>
 
