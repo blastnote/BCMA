@@ -2,7 +2,7 @@
 require 'utils/docStart.php';
 
 if (strpos($_SESSION['userPerms'], 'a') === false) {
-  header("Location: ../index.php");
+  header("Location: ../index.php?perm=archives");
   exit();
 }
 
@@ -94,7 +94,7 @@ include_once '../includes/dbhA.inc.php';
               <!-- Text -->
               <?php echo '<p class="card-text white-text">'.$row['itemDesc'].'</p>'; ?>
 
-              <?php if (!is_null($row['itemTags'])) { 
+              <?php if (!is_null($row['itemTags']) && !($row['itemTags'] === '')) { 
               $s = explode("|", $row['itemTags']);
               echo '<hr class="blue-grey lighten-2">';
               $j = sizeof($s);

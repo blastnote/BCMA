@@ -33,7 +33,7 @@ if (isset($_POST['addEntry-submit'])) {
 			$resultCheck = mysqli_stmt_num_rows($stmt);
 			$AID = $AID.'.'.($resultCheck+1);
 		
-			$sql = "INSERT INTO `active` (`itemID`, `itemAID`, `itemADate`, `itemMPic`, `itemTitle`, `itemDesc`, `itemDonor`, `itemAmount`, `itemLDate`, `itemD`, `itemTags`, `itemMedia`) VALUES (NULL, ?, ?, '', ?, ?, ?, ?, ?, ?, '', '')";
+			$sql = "INSERT INTO `active` (`itemID`, `itemAID`, `itemADate`, `itemMPic`, `itemTitle`, `itemDesc`, `itemDonor`, `itemAmount`, `itemLDate`, `itemD`, `itemTags`, `itemMedia`) VALUES (NULL, ?, ?, '', ?, ?, ?, ?, ?, ?, NULL, '')";
 			$stmt = mysqli_stmt_init($conn);
 
 			if (!mysqli_stmt_prepare($stmt, $sql)) {
