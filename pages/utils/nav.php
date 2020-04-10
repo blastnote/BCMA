@@ -51,7 +51,16 @@
       <li>
         <form class="form-inline" action="" method="POST">
           <div class="md-form my-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
+            <?php 
+            if (isset($_GET['search'])) {
+              if ($_GET['search'] !== false && !is_null($_GET['search'])) {
+                $t = str_replace("+"," ",$_GET['search']);
+                echo '<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search" value="'.$t.'">';
+              }
+            } else {
+              echo '<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">';
+            }
+            ?>
             <button class="mr-sm-2" type="submit" name="search-submit"><i class="fa fa-search" aria-hidden="true"></i></button>
           </div>
         </form>
