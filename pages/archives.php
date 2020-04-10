@@ -25,23 +25,24 @@ include_once '../includes/dbhA.inc.php';
       <!-- Search options -->
       <div class="refine white-text mt-4 mb-2 ml-4">
         <!-- Relative radio -->
-        <div class="form-check form-check-inline">
-          <input type="radio" class="form-check-input" id="relativeSearch" name="relativeSearch" checked>
-          <label class="form-check-label" for="relativeSearch">Relative</label>
-        </div>
+        <?php
+        // <div class="form-check form-check-inline">
+        //   <input type="radio" class="form-check-input" id="relativeSearch" name="relativeSearch" checked>
+        //   <label class="form-check-label" for="relativeSearch">Relative</label>
+        // </div>
 
-        <!-- Recent radio -->
-        <div class="form-check form-check-inline">
-          <input type="radio" class="form-check-input" id="recentSearch" name="relativeSearch">
-          <label class="form-check-label" for="recentSearch">Recent</label>
-        </div>
+        // <!-- Recent radio -->
+        // <div class="form-check form-check-inline">
+        //   <input type="radio" class="form-check-input" id="recentSearch" name="relativeSearch">
+        //   <label class="form-check-label" for="recentSearch">Recent</label>
+        // </div>
 
-        <!-- A-Z radio -->
-        <div class="form-check form-check-inline">
-          <input type="radio" class="form-check-input" id="AZSearch" name="relativeSearch">
-          <label class="form-check-label" for="AZSearch">A-Z</label>
-        </div>
-
+        // <!-- A-Z radio -->
+        // <div class="form-check form-check-inline">
+        //   <input type="radio" class="form-check-input" id="AZSearch" name="relativeSearch">
+        //   <label class="form-check-label" for="AZSearch">A-Z</label>
+        // </div>
+        ?>
         <?php $d = 1; if (strpos($_SESSION['userPerms'], 'd') !== false) { ?>
         <!-- Deaccession switch -->
         <div class="switch custom-control-inline">
@@ -55,7 +56,14 @@ include_once '../includes/dbhA.inc.php';
 
       <div class="grid ml-4">
         <?php
-        $sql = "SELECT * FROM active LIMIT 30;";
+        // $sql = ($_GET['search'] !== false && !is_null($_GET['search']))? "":"SELECT * FROM active LIMIT 30;";
+        if ($_GET['search'] !== false && !is_null($_GET['search'])) {
+          $t = str_replace("+"," ",$_GET['search']);
+          $sql = "SELECT * FROM active WHERE (itemAID LIKE '%".$t."%' OR itemTitle LIKE '%".$t."%' OR itemDesc LIKE '%".$t."%' OR itemDonor LIKE '%".$t."%')";
+          // "SELECT * FROM active WHERE (itemAID LIKE '$t' OR itemTitle LIKE '$t' OR itemDesc LIKE '$t' OR itemDonor LIKE '$t')"
+        } else {
+          $sql = "SELECT * FROM active LIMIT 30;";
+        }
         $result = mysqli_query($conn, $sql);
         $resultCheck = mysqli_num_rows($result);
 
