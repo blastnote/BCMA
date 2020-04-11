@@ -23,7 +23,7 @@ include_once '../includes/dbhA.inc.php';
 
     <!-- <div class="container no-gutters mt-4"> -->
       <!-- Search options -->
-      <div class="refine white-text mt-4 mb-2 ml-4">
+      <div class="refine white-text pt-4 mb-2 ml-4 mt-1">
         <!-- Relative radio -->
         <?php
         // <div class="form-check form-check-inline">

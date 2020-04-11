@@ -1,3 +1,6 @@
+.searchbtn {
+  visibility: hidden;
+}
 
 .tags {
   overflow: hidden;
@@ -24,6 +27,9 @@
 @media only screen and (min-width: 768px) {
   /* tablets and desktop */
 
+  .pt-5 {
+    padding-top: 3rem !important;
+  }
   .card-side {
     max-width: 300px;
   }
@@ -44,8 +50,11 @@
 @media only screen and (max-width: 767px) {
   /* phones */
 
+  .pt-5, .pt-4, .mt-3 {
+    padding-top: 0.4rem !important;
+  }
   .card-side {
-    max-width: 310px;
+    max-width: 340px;
   }
   .grid-item {
     width: 310px; 
