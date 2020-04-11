@@ -86,13 +86,13 @@ $resultCheck = mysqli_num_rows($result);
 
       <?php if (!is_null($row['itemMedia']) && !($row['itemMedia'] == "")) {?>
         <!-- <div class="row"> -->
-      <div class="carousel">
+      <div class="carousel image-viewer">
         <?php 
             $s = explode("|", $row['itemMedia']);
             $j = sizeof($s);
             
             for ($i=0; $i < $j; $i++) { 
-                echo '<div class="carousel-cell"><img data-flickity-lazyload="'.$s[$i].'" /></div>';
+                echo '<div class="carousel-cell image-viewer"><img data-flickity-lazyload="'.$s[$i].'" /></div>';
             }
           ?>
       </div>

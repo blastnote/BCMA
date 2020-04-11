@@ -21,14 +21,50 @@
   line-height: 42px;
   border-radius: 21px;
 }
+@media only screen and (min-width: 768px) {
+  /* tablets and desktop */
 
-.card-side {
-  max-width: 300px;
+  .card-side {
+    max-width: 300px;
+  }
+  .grid-item {
+    width: 360px; 
+  }
+
+  .image-viewer {
+    height: 460px;
+    width: 700px;
+  }
+  .image-viewer img {
+    height: 100%;
+    width: auto;
+  }
 }
 
-.grid-item {
-  width: 360px; 
+@media only screen and (max-width: 767px) {
+  /* phones */
+
+  .card-side {
+    max-width: 310px;
+  }
+  .grid-item {
+    width: 310px; 
+  }
+
+  .image-viewer {
+    height: 200px;
+    width: 330px;
+  }
+  .image-viewer img {
+    height: 100%;
+    width: auto;
+  }
 }
+
+/* @media only screen and (max-width: 767px) and (orientation: portrait) {
+  /* portrait phones */
+} */
+
 
 /* Rules for sizing the icon. */
 .md-id { 
