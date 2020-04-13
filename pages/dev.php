@@ -32,6 +32,8 @@
         <li>Reorganize PHP server for expansion</li>
         <li>Make (more) mobile friendly</li>
         <li>Rework site permissions</li>
+        <li>Multi entry adding</li>
+        <li>Multi file upload</li>
     </ul>
 
     <h2>Minor To-Do</h2>

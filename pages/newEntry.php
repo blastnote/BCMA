@@ -12,20 +12,22 @@
 <main class="elegant-color min-vh-100 pt-5">
 
   <div class="container-fluid mt-4">
-  	<form action="../includes/addEntry.inc.php" method="POST">
+  	<form action="../includes/addEntry.inc.php" method="POST" enctype="multipart/form-data">
 				<!-- <input type="text" class="form-control mb-4" name="AID" placeholder="Item archival ID" required> -->
 				
+				<input type="text" class="form-control mb-4" name="Title" placeholder="Item Title" required>
+
 				<input type="date" class="form-control mb-4" name="ADate" placeholder="Accession date" required>
 
 				<input type="date" class="form-control mb-4" name="LDate" placeholder="Loan date">
 				
-				<input type="text" class="form-control mb-4" name="Title" placeholder="Item Title" required>
-
 				<input type="text" class="form-control mb-4" name="Desc" placeholder="Item description" required>
 
 				<input type="text" class="form-control mb-4" name="Donor" placeholder="Item Donor" required>
 
 				<input type="number" class="form-control mb-4" name="Amount" placeholder="Item Amount" required>
+
+				<input type="file" class="fmb-4 white-text" name="File" accept="image/*">
 
 				<div class="switch custom-control-inline">
 					<label class="white-text">

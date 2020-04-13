@@ -56,11 +56,9 @@ include_once '../includes/dbhA.inc.php';
 
       <div class="grid ml-4">
         <?php
-        // $sql = ($_GET['search'] !== false && !is_null($_GET['search']))? "":"SELECT * FROM active LIMIT 30;";
-        if ($_GET['search'] !== false && !is_null($_GET['search'])) {
+        if (isset($_GET['search']) && $_GET['search'] !== false && !is_null($_GET['search'])) {
           $t = str_replace("+"," ",$_GET['search']);
           $sql = "SELECT * FROM active WHERE (itemAID LIKE '%".$t."%' OR itemTitle LIKE '%".$t."%' OR itemDesc LIKE '%".$t."%' OR itemDonor LIKE '%".$t."%')";
-          // "SELECT * FROM active WHERE (itemAID LIKE '$t' OR itemTitle LIKE '$t' OR itemDesc LIKE '$t' OR itemDonor LIKE '$t')"
         } else {
           $sql = "SELECT * FROM active LIMIT 30;";
         }
