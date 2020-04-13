@@ -49,7 +49,7 @@ if (isset($_POST['addEntry-submit'])) {
 				$fileTmpName = $_FILES['File']['tmp_name'];
 
 				$fileExt = end(explode('.',$fileName));
-				$allowed = array('jpg','jpeg','png');
+				$allowed = array('jpg','jpeg','png','gif');
 
 				if ($_FILES['File']['error']>0) { $uploadMsg='upErr'; return; }
 				if (!in_array(strtolower($fileExt),$allowed)) { $uploadMsg='typErr'; return; }

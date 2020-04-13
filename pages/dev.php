@@ -38,11 +38,11 @@
 
     <h2>Minor To-Do</h2>
     <ul>
-        <li>File upload</li>
+        <li><strike>File upload</strike></li>
         <li>Entry editing/ deleting</li>
-        <li>Page limit update (jqueary ajax)</li>
+        <li><strike>Page limit update (jqueary ajax)</strike> <i>Kinda</i></li>
         <li>Settings rework</li>
-        <li>Display deaccessioned items</li>
+        <li><strike>Display deaccessioned items</strike> <i>Kinda</i></li>
     </ul>
 
   </div>

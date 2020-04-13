@@ -19,7 +19,7 @@ include_once '../includes/dbhA.inc.php';
   <?php require "utils/nav.php"; ?>
 
   <!-- Main body -->
-  <main class="elegant-color min-vh-100 pt-5">
+  <main class="elegant-color min-vh-100 pt-5 pb-5">
 
     <!-- <div class="container no-gutters mt-4"> -->
       <!-- Search options -->
@@ -45,12 +45,12 @@ include_once '../includes/dbhA.inc.php';
         ?>
         <?php $d = 1; if (strpos($_SESSION['userPerms'], 'd') !== false) { ?>
         <!-- Deaccession switch -->
-        <div class="switch custom-control-inline">
+        <!-- <div class="switch custom-control-inline">
           <label>
             <input type="checkbox" name="">
             <span class="lever"></span> Deaccessioned items
           </label>
-        </div>
+        </div> -->
         <?php } ?>
       </div>
 
@@ -60,7 +60,7 @@ include_once '../includes/dbhA.inc.php';
           $t = str_replace("+"," ",$_GET['search']);
           $sql = "SELECT * FROM active WHERE (itemAID LIKE '%".$t."%' OR itemTitle LIKE '%".$t."%' OR itemDesc LIKE '%".$t."%' OR itemDonor LIKE '%".$t."%')";
         } else {
-          $sql = "SELECT * FROM active LIMIT 30;";
+          $sql = "SELECT * FROM active";
         }
         $result = mysqli_query($conn, $sql);
         $resultCheck = mysqli_num_rows($result);
@@ -74,7 +74,7 @@ include_once '../includes/dbhA.inc.php';
           <!-- Card image -->
           <div class="view view-cascade overlay">
             <?php 
-            if ($row['itemMPic'] !== "") {
+            if ($row['itemMPic'] !== "" && file_exists($row['itemMPic'])) {
               echo '<img class="card-img-top" src="'.$row['itemMPic'].'" alt="Card image cap">';
             } else {
               echo '<img class="card-img-top" src="/img/noimage.png" alt="Card image cap">';

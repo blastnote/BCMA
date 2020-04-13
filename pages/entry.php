@@ -24,7 +24,7 @@ $resultCheck = mysqli_num_rows($result);
 ?>
         
 <!--Main layout-->
-<main class="elegant-color min-vh-100 pt-5">
+<main class="elegant-color min-vh-100 pt-5 pb-5">
 
   <div class="container no-gutters mt-3 pt-3">
     <?php

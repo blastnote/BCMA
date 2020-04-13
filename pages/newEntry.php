@@ -12,7 +12,7 @@
 <main class="elegant-color min-vh-100 pt-5">
 
   <div class="container-fluid mt-4">
-  	<form action="../includes/addEntry.inc.php" method="POST" enctype="multipart/form-data">
+  	<form action="../includes/entry.inc.php" method="POST" enctype="multipart/form-data">
 				<!-- <input type="text" class="form-control mb-4" name="AID" placeholder="Item archival ID" required> -->
 				
 				<input type="text" class="form-control mb-4" name="Title" placeholder="Item Title" required>
