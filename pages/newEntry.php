@@ -25,7 +25,7 @@
 
 				<input type="text" class="form-control mb-4" name="Donor" placeholder="Item Donor" required>
 
-				<input type="number" class="form-control mb-4" name="Amount" placeholder="Item Amount" required>
+				<input type="number" min="1" max="999" class="form-control mb-4" name="Amount" placeholder="Item Amount" required>
 
 				<input type="file" class="fmb-4 white-text" name="File" accept="image/*">
 
