@@ -108,11 +108,38 @@ $resultCheck = mysqli_num_rows($result);
 
     <?php if (strpos($_SESSION['userPerms'], 'A') !== false) { ?>
     <!-- Button trigger modal -->
-    <div class="float-sm-right d-flex justify-content-end">
-      <button id="modalActivate" type="button" class="btn btn-outline-warning waves-effect" data-toggle="modal" data-target="#editEntry">Edit</button>
-      <button id="modalActivate" type="button" class="btn btn-outline-danger waves-effect" data-toggle="modal" data-target="#deleteEntry">Delete</button>
+    <div class="float-sm-right d-flex justify-content-end mb-5 mt-2">
+      <button id="modalActivate" type="button" class="btn btn-outline-info waves-effect btn-sm" data-toggle="modal" data-target="#addFiles">Add Images</button>
+      <button id="modalActivate" type="button" class="btn btn-outline-warning waves-effect btn-sm" data-toggle="modal" data-target="#editEntry">Edit</button>
+      <button id="modalActivate" type="button" class="btn btn-outline-danger waves-effect btn-sm" data-toggle="modal" data-target="#deleteEntry">Delete</button>
     </div>
     <?php } ?>
+
+    <!-- Add file modal -->
+    <div class="modal fade" id="addFiles" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content blue-grey darken-1">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold white-text" id="exampleModalPreviewLabel">Add pictures</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class="white-text" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="../includes/entry.inc.php" method="POST" enctype="multipart/form-data">
+            <div class="modal-body white-text">
+              ...
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <?php
+                echo '<input type="hidden" name="id" value="'.$_GET['item'].'">';
+              ?>
+              <input type="submit" class="btn btn-purple" name="updateEntry-submit" value="Add">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Add file modal -->
 
     <!-- Edit modal -->
     <div class="modal fade" id="editEntry" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -125,7 +152,7 @@ $resultCheck = mysqli_num_rows($result);
             </button>
           </div>
 
-          <form action="" method="post">
+          <form action="../includes/entry.inc.php" method="post">
             <div class="modal-body mx-3">
               <div class="md-form mb-4">
                 <?php
@@ -185,6 +212,7 @@ $resultCheck = mysqli_num_rows($result);
             <div class="modal-footer d-flex justify-content-center">
               <?php
                 echo '<input type="hidden" name="id" value="'.$_GET['item'].'">';
+                echo '<input type="hidden" name="OAID" value="'.$row['itemAID'].'">';
               ?>
               <input type="submit" class="btn btn-purple" name="updateEntry-submit" value="Update">
             </div>
@@ -200,6 +228,7 @@ $resultCheck = mysqli_num_rows($result);
         <div class="modal-content blue-grey darken-1">
           <div class="modal-body white-text">
             <h2>Are you sure you want to delete this entry?</h2>
+            <p>This will permenantly delete all media items as well</p>
           </div>
           <div class="modal-footer">
             <form action="../includes/entry.inc.php" method="post">

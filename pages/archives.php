@@ -63,9 +63,8 @@ include_once '../includes/dbhA.inc.php';
           $sql = "SELECT * FROM active";
         }
         $result = mysqli_query($conn, $sql);
-        $resultCheck = mysqli_num_rows($result);
 
-        if ($resultCheck > 0) {
+        if (mysqli_num_rows($result) > 0) {
           while ($row = mysqli_fetch_assoc($result)) { 
             if (($row['itemD'] == 0) || $d) { ?>
         <!-- Card start -->
