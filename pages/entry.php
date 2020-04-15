@@ -97,7 +97,7 @@ $resultCheck = mysqli_num_rows($result);
             $j = sizeof($s);
             
             for ($i=0; $i < $j; $i++) { 
-                echo '<div class="carousel-cell image-viewer"><img data-flickity-lazyload="'.$s[$i].'" /></div>';
+                echo '<div class="carousel-cell image-viewer text-center"><img data-flickity-lazyload="'.$s[$i].'" /></div>';
             }
           ?>
       </div>
