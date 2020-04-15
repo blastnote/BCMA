@@ -39,7 +39,8 @@
     <h2>Minor To-Do</h2>
     <ul>
         <li><strike>File upload</strike></li>
-        <li>Entry editing/ deleting</li>
+        <li><strike>Entry editing/ deleting</strike></li>
+        <li><strike>Add other pictures</strike></li>
         <li><strike>Page limit update (jqueary ajax)</strike> <i>Kinda</i></li>
         <li>Settings rework</li>
         <li><strike>Display deaccessioned items</strike> <i>Kinda</i></li>

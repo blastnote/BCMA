@@ -39,7 +39,6 @@ if (isset($_POST['addEntry-submit'])) {
 		} else { $AID = $AID.'.1'; }
 
 		if (isset($_FILES['File']) && $_FILES['File']['size']>0) {
-			print_r($_FILES['File']);
 			$fileName = $_FILES['File']['name'];
 			$fileTmpName = $_FILES['File']['tmp_name'];
 
@@ -199,9 +198,66 @@ elseif (isset($_POST['deleteEntry-submit'])) {
 }
 
 elseif (isset($_POST['addFiles-submit'])) {
+	require 'dbhA.inc.php';
 
+	$id = $_POST['id'];
+	$uploadMsg = '';
+	$countfiles = count($_FILES['file']['name']);
 
-	
+	$sql = "SELECT * FROM active WHERE itemID = ".$id;
+	$result = mysqli_query($conn, $sql);
+
+	if (mysqli_num_rows($result)) {
+		$row = mysqli_fetch_assoc($result);
+ 
+		$pic = $row['itemMPic'];
+		$media = $row['itemMedia'];
+		$AID = $row['itemAID'];
+
+		// Looping all files
+		for($i=0;$i<$countfiles;$i++){
+			$fileName = $_FILES['file']['name'][$i];
+			$fileTmpName = $_FILES['file']['tmp_name'][$i];
+			
+			$fileExt = end(explode('.',$fileName));
+			$allowed = array('jpg','jpeg','png','gif');
+
+			// Error handling
+			if ($_FILES['file']['error'][$i]>0) { $uploadMsg='upErr'; return; }
+			if (!in_array(strtolower($fileExt),$allowed)) { $uploadMsg='typErr'; return; }
+			if ($_FILES['file']['size'][$i]>16000000) { $uploadMsg='tooBig'; return; }
+
+			$NewDir = '../uploads/'.$AID.'/'.$fileName;
+
+			if (!is_dir('../uploads/'.$AID)) { mkdir('../uploads/'.$AID); }
+			if (move_uploaded_file($fileTmpName, $NewDir)) { $uploadMsg = 'success'; }
+			else { $uploadMsg = 'failMv'; }
+
+			if (is_null($pic) || $pic == '') { $pic = $NewDir; } 
+			if (is_null($media) || $media == '') { $media = $NewDir; } 
+			else { $media = $media.'|'.$NewDir; }
+		}
+
+		$sql = "UPDATE `active` SET `itemMPic` = ?, `itemMedia` = ? WHERE itemID = ".$id.";";
+		$stmt = mysqli_stmt_init($conn);
+
+		if (!mysqli_stmt_prepare($stmt, $sql)) {
+			header("Location: ../pages/entry.php?item=".$id."&error=sqlAddFileError");
+			exit();
+		}
+		
+		else {
+			//actually adding item
+			mysqli_stmt_bind_param($stmt, "ss", $pic, $media);
+			mysqli_stmt_execute($stmt);
+			
+			header("Location: ../pages/entry.php?item=".$id."&addFile=success");
+			exit();
+		}
+	} else {
+		header("Location: ../pages/entry.php?item=".$id."&error=noData");
+		exit();
+	}
 }
 
 else {

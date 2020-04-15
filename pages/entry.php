@@ -127,13 +127,13 @@ $resultCheck = mysqli_num_rows($result);
           </div>
           <form action="../includes/entry.inc.php" method="POST" enctype="multipart/form-data">
             <div class="modal-body white-text">
-              ...
+            <input type="file" class="fmb-4 white-text" name="file[]" accept="image/*" multiple>
             </div>
             <div class="modal-footer d-flex justify-content-center">
               <?php
                 echo '<input type="hidden" name="id" value="'.$_GET['item'].'">';
               ?>
-              <input type="submit" class="btn btn-purple" name="updateEntry-submit" value="Add">
+              <input type="submit" class="btn btn-purple" name="addFiles-submit" value="Add">
             </div>
           </form>
         </div>
