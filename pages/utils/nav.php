@@ -72,6 +72,10 @@
     <div class="nav-item avatar dropdown">
       <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <img src="../img/account.png" class="rounded-circle z-depth-0" alt="avatar image">
+        <p class="float-right white-text pt-1 pl-2"><?php 
+          $firstName = explode(' ',$_SESSION['userName']);
+          echo $firstName[0];
+        ?></p>
       </a>
       <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
         <a class="dropdown-item" href="../pages/settings.php">Settings</a>
