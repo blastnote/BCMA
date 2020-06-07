@@ -7,6 +7,7 @@ if (isset($_POST['addUser-submit'])) {
 	$name = $_POST['name'];
 	$password = $_POST['pwd'];
 	$passwordRepeat = $_POST['pwdRepeat'];
+	$perms = 'a'.($_POST['editEntries']?'A':'').($_POST['editUsers']?'u':'');
 
 	if (empty($username) || empty($name) || empty($password) || empty($passwordRepeat)) {
 		header("Location: ../pages/settings.php?error=emptyfields&uid=".$username."");
@@ -51,7 +52,7 @@ if (isset($_POST['addUser-submit'])) {
 
 			else { // Actually creating user
 
-				$sql = "INSERT INTO users (idUsers, uidUsers, nameUsers, permUsers, pwdUsers) VALUES (NULL,?, ?, '', ?)";
+				$sql = "INSERT INTO users (idUsers, uidUsers, nameUsers, permUsers, pwdUsers) VALUES (NULL,?, ?, ?, ?)";
 				$stmt = mysqli_stmt_init($conn);
 
 				if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -62,7 +63,7 @@ if (isset($_POST['addUser-submit'])) {
 				else {
 					$hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 
-					mysqli_stmt_bind_param($stmt, "sss", $username, $name, $hashedPwd);
+					mysqli_stmt_bind_param($stmt, "ssss", $username, $name, $perms, $hashedPwd);
 					mysqli_stmt_execute($stmt);
 					header("Location: ../pages/settings.php?addUser=success");
 					exit();
