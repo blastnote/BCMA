@@ -106,14 +106,14 @@ $resultCheck = mysqli_num_rows($result);
     </div>
     </div>
 
-    <?php if (strpos($_SESSION['userPerms'], 'A') !== false) { ?>
+    <?php if (!(strpos($_SESSION['userPerms'], 'A') === false)) { ?>
     <!-- Button trigger modal -->
     <div class="float-sm-right d-flex justify-content-end mb-5 mt-2">
       <button id="modalActivate" type="button" class="btn btn-outline-info waves-effect btn-sm" data-toggle="modal" data-target="#addFiles">Add Images</button>
       <button id="modalActivate" type="button" class="btn btn-outline-warning waves-effect btn-sm" data-toggle="modal" data-target="#editEntry">Edit</button>
       <button id="modalActivate" type="button" class="btn btn-outline-danger waves-effect btn-sm" data-toggle="modal" data-target="#deleteEntry">Delete</button>
     </div>
-    <?php } ?>
+    
 
     <!-- Add file modal -->
     <div class="modal fade" id="addFiles" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
@@ -155,44 +155,32 @@ $resultCheck = mysqli_num_rows($result);
           <form action="../includes/entry.inc.php" method="post">
             <div class="modal-body mx-3">
               <div class="md-form mb-4">
-                <?php
-                echo '<input type="text" id="itemTitle" name="Title" class="form-control white-text validate" value="'.$row['itemTitle'].'">';
-                ?>
+                <?php echo '<input type="text" id="itemTitle" name="Title" class="form-control white-text validate" value="'.$row['itemTitle'].'">'; ?>
                 <label class="white-text" data-error="wrong" data-success="right" for="itemTitle">Title</label>
               </div>
               
               <div class="md-form mb-4">
-                <?php
-                echo '<input type="text" id="itemDonor" name="Donor" class="form-control white-text validate" value="'.$row['itemDonor'].'">';
-                ?>
+                <?php echo '<input type="text" id="itemDonor" name="Donor" class="form-control white-text validate" value="'.$row['itemDonor'].'">'; ?>
                 <label class="white-text" data-error="wrong" data-success="right" for="itemDonor">Donor</label>
               </div>
               
               <div class="md-form mb-4">
-                <?php
-                echo '<input type="text" id="itemDesc" name="Desc" class="form-control white-text validate" value="'.$row['itemDesc'].'">';
-                ?>
+                <?php echo '<input type="text" id="itemDesc" name="Desc" class="form-control white-text validate" value="'.$row['itemDesc'].'">'; ?>
                 <label class="white-text" data-error="wrong" data-success="right" for="itemDesc">Description</label>
               </div>
               
               <div class="md-form mb-4">
                 <label class="white-text">Accession date</label>
-                <?php
-                echo '<input type="date" name="ADate" class="form-control white-text" value="'.$row['itemADate'].'">';
-                ?>
+                <?php echo '<input type="date" name="ADate" class="form-control white-text" value="'.$row['itemADate'].'">'; ?>
               </div>
               
               <div class="md-form mb-4">
                 <label class="white-text">Loan date</label>
-                <?php
-                echo '<input type="date" name="LDate" class="form-control white-text" value="'.$row['itemLDate'].'">';
-                ?>
+                <?php echo '<input type="date" name="LDate" class="form-control white-text" value="'.$row['itemLDate'].'">'; ?>
               </div>
               
               <div class="md-form mb-4">
-                <?php
-                echo '<input type="number" min="1" max="999" id="itemAmount" name="Amount" class="form-control white-text validate" value="'.$row['itemAmount'].'">';
-                ?>
+                <?php echo '<input type="number" min="1" max="999" id="itemAmount" name="Amount" class="form-control white-text validate" value="'.$row['itemAmount'].'">'; ?>
                 <label class="white-text" data-error="wrong" data-success="right" for="itemAmount">Number of items</label>
               </div>
 
@@ -244,6 +232,7 @@ $resultCheck = mysqli_num_rows($result);
       </div>
     </div>
     <!-- Delete modal -->
+    <?php } ?>
 
   <?php }?>
   </div>
