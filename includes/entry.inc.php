@@ -5,7 +5,6 @@ This script adds an entry to the database and handles uploading ONE file into th
 update functions allow for multiple files to be uploaded
 (Needs to be rewritten for file deletion without distroying entry)
 */
-if (strpos($_SESSION['userPerms'], 'A') !== false) {
 
 if (isset($_POST['addEntry-submit'])) {
 	// Get connection
@@ -261,11 +260,6 @@ elseif (isset($_POST['addFiles-submit'])) {
 		exit();
 	}
 } else { // Exit from no submition data
-	header("Location: ../index.php");
-	exit();
-}
-
-} else { // Exit from invalid perms
 	header("Location: ../index.php");
 	exit();
 }
