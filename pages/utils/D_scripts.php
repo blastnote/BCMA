@@ -1,4 +1,4 @@
-<div class="fixed-bottom d-flex justify-content-end pr-2"><a class="text-muted" href="../pages/dev.php">Dev 0.8.9</a></div>
+<div class="fixed-bottom d-flex justify-content-end pr-2"><a class="text-muted" href="../pages/dev.php">Dev 0.10.6</a></div>
 
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/popper.min.js"></script>

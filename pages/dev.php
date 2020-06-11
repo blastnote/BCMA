@@ -33,17 +33,11 @@
         <li>Make (more) mobile friendly</li>
         <li>Rework site permissions</li>
         <li>Multi entry adding</li>
-        <li>Multi file upload</li>
     </ul>
 
     <h2>Minor To-Do</h2>
     <ul>
-        <li><strike>File upload</strike></li>
-        <li><strike>Entry editing/ deleting</strike></li>
-        <li><strike>Add other pictures</strike></li>
-        <li><strike>Page limit update (jqueary ajax)</strike> <i>Kinda</i></li>
-        <li>Settings rework</li>
-        <li><strike>Display deaccessioned items</strike> <i>Kinda</i></li>
+        <li>Page limit update (jqueary ajax)</li>
     </ul>
 
   </div>
