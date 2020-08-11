@@ -37,8 +37,12 @@ $resultCheck = mysqli_num_rows($result);
     <div class="flex-sm-column white-text">
       <div class="card card-side card-cascade mt-2 mr-5 mb-4">
         <!-- Card image -->
-        <?php if ($row['itemMPic'] !== "") {
-            echo '<img class="card-img-top" src="'.$row['itemMPic'].'" alt="Card image cap">';
+        <?php if ($row['itemMedia'] !== "") {
+            $s = explode("|", $row['itemMedia']);
+            if (file_exists($s[0])) {
+              echo '<img class="card-img-top" src="'.$s[0].'" alt="Card image cap">';
+            } else { echo '<img class="card-img-top" src="/img/noimage.png" alt="Card image cap">'; }
+            
           } else {
             echo '<img class="card-img-top" src="/img/noimage.png" alt="Card image cap">';
           }?>

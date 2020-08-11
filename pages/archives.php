@@ -65,16 +65,19 @@ include_once '../includes/dbhA.inc.php';
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) > 0) {
-          while ($row = mysqli_fetch_assoc($result)) { 
-            if (($row['itemD'] == 0) || $d) { ?>
+          while ($row = mysqli_fetch_assoc($result)) {  ?>
         <!-- Card start -->
         <div class="grid-item card card-cascade mb-2">
 
           <!-- Card image -->
           <div class="view view-cascade overlay">
             <?php 
-            if ($row['itemMPic'] !== "" && file_exists($row['itemMPic'])) {
-              echo '<img class="card-img-top" src="'.$row['itemMPic'].'" alt="Card image cap">';
+            if ($row['itemMedia'] !== "") {
+              $s = explode("|", $row['itemMedia']);
+              if (file_exists($s[0])) {
+                echo '<img class="card-img-top" src="'.$s[0].'" alt="Card image cap">';
+              } else { echo '<img class="card-img-top" src="/img/noimage.png" alt="Card image cap">'; }
+              
             } else {
               echo '<img class="card-img-top" src="/img/noimage.png" alt="Card image cap">';
             }
@@ -122,7 +125,7 @@ include_once '../includes/dbhA.inc.php';
           </div>
         </div>
         <!-- Card end -->
-        <?php }}} else { echo "Error"; }?>
+        <?php }} else { echo "Error"; }?>
       </div>
     <!-- </div> -->
   </main>

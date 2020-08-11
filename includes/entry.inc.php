@@ -58,7 +58,7 @@ if (isset($_POST['addEntry-submit'])) {
 			else { $uploadMsg = 'failMv'; }
 		}
 	
-		$sql = "INSERT INTO `active` (`itemID`, `itemAID`, `itemADate`, `itemMPic`, `itemTitle`, `itemDesc`, `itemDonor`, `itemAmount`, `itemLDate`, `itemD`, `itemTags`, `itemMedia`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?)";
+		$sql = "INSERT INTO `active` (`itemID`, `itemAID`, `itemADate`, `itemTitle`, `itemDesc`, `itemDonor`, `itemAmount`, `itemLDate`, `itemD`, `itemTags`, `itemMedia`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?)";
 		$stmt = mysqli_stmt_init($conn);
 
 		if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -68,7 +68,7 @@ if (isset($_POST['addEntry-submit'])) {
 		
 		else {
 			//actually adding item
-			mysqli_stmt_bind_param($stmt, "ssssssssss", $AID, $ADate, $pic, $Title, $Desc, $Donor, $Amount, $LDate, $D, $pic);
+			mysqli_stmt_bind_param($stmt, "sssssssss", $AID, $ADate, $Title, $Desc, $Donor, $Amount, $LDate, $D, $pic);
 			mysqli_stmt_execute($stmt);
 			if (is_null($uploadMsg)) {
 				header("Location: ../pages/newEntry.php?addEntry=success");
@@ -95,7 +95,6 @@ elseif (isset($_POST['updateEntry-submit'])) {
 	$Amount = $_POST['Amount'];
 	$D = $_POST['D'] ? 1 : 0;
 	$AID = 'BCM.'.date('Y',strtotime($ADate)).'.'.preg_replace("/[^a-zA-Z]/", "", strtolower($Donor));
-	$pic = '';
 	$media = '';
 
 	$id = $_POST['id'];
@@ -126,14 +125,13 @@ elseif (isset($_POST['updateEntry-submit'])) {
 			if (mysqli_num_rows($result)) {
 				$media = mysqli_fetch_assoc($result);
 				$media = str_replace($OAID, $AID, $media['itemMedia'], $j);
-				$pic = explode("|",$media)[0];
 
 				if (is_dir('../uploads/'.$OAID)) {
 					rename('../uploads/'.$OAID, '../uploads/'.$AID);
 				}
 			}
 
-			$sql = "UPDATE `active` SET `itemAID` = ?, `itemADate` = ?, `itemMPic` = ?, `itemTitle` = ?, `itemDesc` = ?, `itemDonor` = ?, `itemAmount` = ?, `itemLDate` = ?, `itemD` = ?, `itemTags` = NULL, `itemMedia` = ? WHERE itemID = ".$id.";";
+			$sql = "UPDATE `active` SET `itemAID` = ?, `itemADate` = ?, `itemTitle` = ?, `itemDesc` = ?, `itemDonor` = ?, `itemAmount` = ?, `itemLDate` = ?, `itemD` = ?, `itemTags` = NULL, `itemMedia` = ? WHERE itemID = ".$id.";";
 			$stmt = mysqli_stmt_init($conn);
 
 			if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -143,7 +141,7 @@ elseif (isset($_POST['updateEntry-submit'])) {
 			
 			else {
 				//actually adding item
-				mysqli_stmt_bind_param($stmt, "ssssssssss", $AID, $ADate, $pic, $Title, $Desc, $Donor, $Amount, $LDate, $D, $media);
+				mysqli_stmt_bind_param($stmt, "sssssssss", $AID, $ADate, $Title, $Desc, $Donor, $Amount, $LDate, $D, $media);
 				mysqli_stmt_execute($stmt);
 				
 				header("Location: ../pages/entry.php?item=".$id."&update=success");
@@ -211,7 +209,6 @@ elseif (isset($_POST['addFiles-submit'])) {
 	if (mysqli_num_rows($result)) {
 		$row = mysqli_fetch_assoc($result);
  
-		$pic = $row['itemMPic'];
 		$media = $row['itemMedia'];
 		$AID = $row['itemAID'];
 
@@ -234,12 +231,11 @@ elseif (isset($_POST['addFiles-submit'])) {
 			if (move_uploaded_file($fileTmpName, $NewDir)) { $uploadMsg = 'success'; }
 			else { $uploadMsg = 'failMv'; }
 
-			if (is_null($pic) || $pic == '') { $pic = $NewDir; } 
 			if (is_null($media) || $media == '') { $media = $NewDir; } 
 			else { $media = $media.'|'.$NewDir; }
 		}
 
-		$sql = "UPDATE `active` SET `itemMPic` = ?, `itemMedia` = ? WHERE itemID = ".$id.";";
+		$sql = "UPDATE `active` SET `itemMedia` = ? WHERE itemID = ".$id.";";
 		$stmt = mysqli_stmt_init($conn);
 
 		if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -249,7 +245,7 @@ elseif (isset($_POST['addFiles-submit'])) {
 		
 		else {
 			//actually adding item
-			mysqli_stmt_bind_param($stmt, "ss", $pic, $media);
+			mysqli_stmt_bind_param($stmt, "s", $media);
 			mysqli_stmt_execute($stmt);
 			
 			header("Location: ../pages/entry.php?item=".$id."&addFile=success");
