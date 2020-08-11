@@ -100,7 +100,11 @@ include_once '../includes/dbhA.inc.php';
                 ?>
 
               <!-- Text -->
-              <?php echo '<p class="card-text white-text">'.$row['itemDesc'].'</p>'; ?>
+              <?php 
+              if (strlen($row['itemDesc']) > 200) {
+                echo '<p class="card-text white-text">'.substr($row['itemDesc'], 0, 200).'...'.'</p>';
+              } else { echo '<p class="card-text white-text">'.$row['itemDesc'].'</p>'; }
+              ?>
 
               <?php if (!is_null($row['itemTags']) && !($row['itemTags'] === '')) { 
               $s = explode("|", $row['itemTags']);
