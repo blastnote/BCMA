@@ -10,16 +10,16 @@
         
 <!--Main layout-->
 <main class="elegant-color min-vh-100 pt-4">
-
   <div class="container-fluid">
 
-  </div>
 
+
+  </div>
 </main>
 <!--Main layout-->
 
-    <!-- End -->
-  <?php require 'pages/utils/D_scripts.php'; ?>
+<!-- End -->
+<?php require 'pages/utils/D_scripts.php'; ?>
 
 </body>
 </html>

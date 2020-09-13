@@ -19,57 +19,65 @@ include_once '../includes/dbhA.inc.php';
   <?php require "utils/nav.php"; ?>
 
   <!-- Main body -->
-  <main class="elegant-color min-vh-100 pt-5">
+  <main class="elegant-color min-vh-100 pt-5 pb-5">
 
     <!-- <div class="container no-gutters mt-4"> -->
       <!-- Search options -->
-      <div class="refine white-text mt-4 mb-2 ml-4">
+      <div class="refine white-text pt-4 mb-2 ml-4 mt-1">
         <!-- Relative radio -->
-        <div class="form-check form-check-inline">
-          <input type="radio" class="form-check-input" id="relativeSearch" name="relativeSearch" checked>
-          <label class="form-check-label" for="relativeSearch">Relative</label>
-        </div>
+        <?php
+        // <div class="form-check form-check-inline">
+        //   <input type="radio" class="form-check-input" id="relativeSearch" name="relativeSearch" checked>
+        //   <label class="form-check-label" for="relativeSearch">Relative</label>
+        // </div>
 
-        <!-- Recent radio -->
-        <div class="form-check form-check-inline">
-          <input type="radio" class="form-check-input" id="recentSearch" name="relativeSearch">
-          <label class="form-check-label" for="recentSearch">Recent</label>
-        </div>
+        // <!-- Recent radio -->
+        // <div class="form-check form-check-inline">
+        //   <input type="radio" class="form-check-input" id="recentSearch" name="relativeSearch">
+        //   <label class="form-check-label" for="recentSearch">Recent</label>
+        // </div>
 
-        <!-- A-Z radio -->
-        <div class="form-check form-check-inline">
-          <input type="radio" class="form-check-input" id="AZSearch" name="relativeSearch">
-          <label class="form-check-label" for="AZSearch">A-Z</label>
-        </div>
-
+        // <!-- A-Z radio -->
+        // <div class="form-check form-check-inline">
+        //   <input type="radio" class="form-check-input" id="AZSearch" name="relativeSearch">
+        //   <label class="form-check-label" for="AZSearch">A-Z</label>
+        // </div>
+        ?>
         <?php $d = 1; if (strpos($_SESSION['userPerms'], 'd') !== false) { ?>
         <!-- Deaccession switch -->
-        <div class="switch custom-control-inline">
+        <!-- <div class="switch custom-control-inline">
           <label>
             <input type="checkbox" name="">
             <span class="lever"></span> Deaccessioned items
           </label>
-        </div>
+        </div> -->
         <?php } ?>
       </div>
 
       <div class="grid ml-4">
         <?php
-        $sql = "SELECT * FROM active LIMIT 30;";
+        if (isset($_GET['search']) && $_GET['search'] !== false && !is_null($_GET['search'])) {
+          $t = str_replace("+"," ",$_GET['search']);
+          $sql = "SELECT * FROM active WHERE (itemAID LIKE '%".$t."%' OR itemTitle LIKE '%".$t."%' OR itemDesc LIKE '%".$t."%' OR itemDonor LIKE '%".$t."%')";
+        } else {
+          $sql = "SELECT * FROM active";
+        }
         $result = mysqli_query($conn, $sql);
-        $resultCheck = mysqli_num_rows($result);
 
-        if ($resultCheck > 0) {
-          while ($row = mysqli_fetch_assoc($result)) { 
-            if (($row['itemD'] == 0) || $d) { ?>
+        if (mysqli_num_rows($result) > 0) {
+          while ($row = mysqli_fetch_assoc($result)) {  ?>
         <!-- Card start -->
         <div class="grid-item card card-cascade mb-2">
 
           <!-- Card image -->
           <div class="view view-cascade overlay">
             <?php 
-            if ($row['itemMPic'] !== "") {
-              echo '<img class="card-img-top" src="'.$row['itemMPic'].'" alt="Card image cap">';
+            if ($row['itemMedia'] !== "") {
+              $s = explode("|", $row['itemMedia']);
+              if (file_exists($s[0])) {
+                echo '<img class="card-img-top" src="'.$s[0].'" alt="Card image cap">';
+              } else { echo '<img class="card-img-top" src="/img/noimage.png" alt="Card image cap">'; }
+              
             } else {
               echo '<img class="card-img-top" src="/img/noimage.png" alt="Card image cap">';
             }
@@ -92,7 +100,11 @@ include_once '../includes/dbhA.inc.php';
                 ?>
 
               <!-- Text -->
-              <?php echo '<p class="card-text white-text">'.$row['itemDesc'].'</p>'; ?>
+              <?php 
+              if (strlen($row['itemDesc']) > 200) {
+                echo '<p class="card-text white-text">'.substr($row['itemDesc'], 0, 200).'...'.'</p>';
+              } else { echo '<p class="card-text white-text">'.$row['itemDesc'].'</p>'; }
+              ?>
 
               <?php if (!is_null($row['itemTags']) && !($row['itemTags'] === '')) { 
               $s = explode("|", $row['itemTags']);
@@ -117,7 +129,7 @@ include_once '../includes/dbhA.inc.php';
           </div>
         </div>
         <!-- Card end -->
-        <?php }}} else { echo "Error"; }?>
+        <?php }} else { echo "Error"; }?>
       </div>
     <!-- </div> -->
   </main>

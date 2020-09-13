@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>BCM Archives</title>
-<link rel="icon" href="../img/book.png" type="image/x-icon">
+<link rel="icon" href="../img/Book.png" type="image/x-icon">
 <!-- Google Fonts Roboto -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
 <!-- Bootstrap core CSS -->
