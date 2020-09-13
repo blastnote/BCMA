@@ -1,24 +1,25 @@
 <?php require 'utils/docStart.php' ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <?php require '../pages/utils/D_head.php'; ?>
+	<?php require '../pages/utils/D_head.php'; ?>
 </head>
 
 <body>
-<?php require '../pages/utils/nav.php'; ?>
-        
-<!--Main layout-->
-<main class="elegant-color min-vh-100 pt-5">
+	<?php require '../pages/utils/nav.php'; ?>
 
-  <div class="container-fluid mt-4">
-  	<form action="../includes/addEntry.inc.php" method="POST">
+	<!--Main layout-->
+	<main class="elegant-color min-vh-100 pt-5">
+
+		<div class="container-fluid mt-4">
+			<form action="../includes/addEntry.inc.php" method="POST">
 				<!-- <input type="text" class="form-control mb-4" name="AID" placeholder="Item archival ID" required> -->
-				
+
 				<input type="date" class="form-control mb-4" name="ADate" placeholder="Accession date" required>
 
 				<input type="date" class="form-control mb-4" name="LDate" placeholder="Loan date">
-				
+
 				<input type="text" class="form-control mb-4" name="Title" placeholder="Item Title" required>
 
 				<input type="text" class="form-control mb-4" name="Desc" placeholder="Item description" required>
@@ -27,22 +28,33 @@
 
 				<input type="number" class="form-control mb-4" name="Amount" placeholder="Item Amount" required>
 
+				<div class="file-field">
+					<div class="btn btn-primary btn-sm float-left">
+						<span>Choose files</span>
+						<input type="file" multiple>
+					</div>
+					<div class="file-path-wrapper">
+						<input class="file-path validate" type="text" placeholder="Upload one or more files">
+					</div>
+				</div>
+
 				<div class="switch custom-control-inline">
 					<label class="white-text">
-              			<input type="checkbox" name="D">
-              			<span class="lever"></span> Deaccessioned
-            		</label>
-            	</div>
+						<input type="checkbox" name="D">
+						<span class="lever"></span> Deaccessioned
+					</label>
+				</div>
 
 				<button class="btn btn-info btn-block my-4" type="submit" name="addEntry-submit">Add entry</button>
 			</form>
-  </div>
+		</div>
 
-</main>
-<!--Main layout-->
+	</main>
+	<!--Main layout-->
 
-    <!-- End -->
-  <?php require '../pages/utils/D_scripts.php'; ?>
+	<!-- End -->
+	<?php require '../pages/utils/D_scripts.php'; ?>
 
 </body>
+
 </html>
