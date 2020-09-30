@@ -115,6 +115,7 @@ $resultCheck = mysqli_num_rows($result);
     <div class="float-sm-right d-flex justify-content-end mb-5 mt-2">
       <button id="modalActivate" type="button" class="btn btn-outline-info waves-effect btn-sm" data-toggle="modal" data-target="#addFiles">Add Images</button>
       <button id="modalActivate" type="button" class="btn btn-outline-warning waves-effect btn-sm" data-toggle="modal" data-target="#editEntry">Edit</button>
+      <?php if ($row['itemMedia'] !== '' || !is_null($row['itemMedia'])) { echo '<button id="modalActivate" type="button" class="btn btn-outline-danger waves-effect btn-sm" data-toggle="modal" data-target="#deleteFiles">Delete Images</button>'; } ?>
       <button id="modalActivate" type="button" class="btn btn-outline-danger waves-effect btn-sm" data-toggle="modal" data-target="#deleteEntry">Delete</button>
     </div>
     
@@ -144,6 +145,39 @@ $resultCheck = mysqli_num_rows($result);
       </div>
     </div>
     <!-- Add file modal -->
+
+    <!-- Delete file modal -->
+    <div class="modal fade" id="deleteFiles" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content blue-grey darken-1">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold white-text" id="exampleModalPreviewLabel">Delete pictures</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class="white-text" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="../includes/entry.inc.php" method="POST">
+            <div class="modal-body white-text">
+            <?php
+              $m = explode('|',$row['itemMedia']);
+              for ($i=0; $i < count($m); $i++) { 
+                $n = explode('/',$m[$i]);
+                echo '<input type="checkbox" class="form-check-input" id="'.end($n).'" name="'.end($n).'">';
+                echo '<label class="form-check-label" for="'.end($n).'">'.end($n).'</label>';
+              }
+            ?>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <?php
+                echo '<input type="hidden" name="id" value="'.$_GET['item'].'">';
+              ?>
+              <input type="submit" class="btn btn-purple" name="addFiles-submit" value="Delete">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Delete file modal -->
 
     <!-- Edit modal -->
     <div class="modal fade" id="editEntry" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

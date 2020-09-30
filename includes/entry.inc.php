@@ -255,6 +255,24 @@ elseif (isset($_POST['addFiles-submit'])) {
 		header("Location: ../pages/entry.php?item=".$id."&error=noData");
 		exit();
 	}
+} elseif (isset($_POST['deleteFiles-submit'])) {
+	require 'dbhA.inc.php';
+
+	$id = $_POST['id'];
+
+	$sql = "SELECT * FROM active WHERE itemID = ".$id;
+	$result = mysqli_query($conn, $sql);
+
+	if (mysqli_num_rows($result)) {
+		$row = mysqli_fetch_assoc($result);
+		$deleteTbl = [];
+		$media = explode('|',$row['itemMedia']);
+		//bookmark
+	} else {
+		header("Location: ../pages/entry.php?item=".$id."&error=noData");
+		exit();
+	}
+
 } else { // Exit from no submition data
 	header("Location: ../index.php");
 	exit();
